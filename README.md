@@ -69,7 +69,7 @@ docker compose up -d
 
 El proyecto incluye:
 
-- Métricas con Spring Boot Actuator y Micrometer.
+- Metricas con Spring Boot Actuator y Micrometer.
 - Monitoreo con Prometheus.
 - Dashboards en Grafana.
 - Centralización de logs con Loki y Promtail.
