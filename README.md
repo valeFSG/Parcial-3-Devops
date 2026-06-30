@@ -4,7 +4,7 @@
 - Valentina Santana
 - Nicol Gonzalez
 
-## Descripción
+## Descripcion
 
 Este proyecto corresponde al Parcial 3 de DevOps. Consiste en el despliegue y monitoreo de un microservicio de Eventos utilizando herramientas de observabilidad y servicios de AWS.
 
