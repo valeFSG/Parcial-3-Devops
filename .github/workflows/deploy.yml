@@ -38,7 +38,7 @@ jobs:
       - name: Compilar proyecto
         run: |
           chmod +x mvnw
-          ./mvnw clean package "-Dmaven.test.skip=true"
+          ./mvnw clean verify
 
       - name: Construir imagen Docker
         run: |
