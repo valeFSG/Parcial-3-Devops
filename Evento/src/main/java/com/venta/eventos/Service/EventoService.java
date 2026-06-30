@@ -1,47 +1,42 @@
 package com.venta.eventos.Service;
 
+import java.util.ArrayList;
 import java.util.List;
 
-import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
-import org.springframework.web.reactive.function.client.WebClient;
 
 import com.venta.eventos.Model.Evento;
-import com.venta.eventos.Repository.EventoRepository;
 
 @Service
 public class EventoService {
-    @Autowired
-    private EventoRepository repository;
 
-    @Autowired
-    private WebClient webClient;
+    private final List<Evento> eventos = new ArrayList<>();
 
-    public List<Evento> listar(){
-        return repository.findAll();
+    public List<Evento> listar() {
+        return eventos;
     }
 
-    public Evento guardar(Evento evento){
+    public Evento guardar(Evento evento) {
 
-    Object recinto = webClient.get()
-            .uri("http://localhost:8082/recinto/" + evento.getRecintoId())
-            .retrieve()
-            .bodyToMono(Object.class)
-            .block();
+        if (evento.getId() == 0) {
+            evento.setId(eventos.size() + 1);
+        }
 
-    if(recinto == null){
-        throw new RuntimeException("Recinto no encontrado");
+        eventos.removeIf(e -> e.getId() == evento.getId());
+        eventos.add(evento);
+
+        return evento;
     }
 
-    return repository.save(evento);
-}
+    public Evento buscarPorId(Long id) {
 
-    public Evento buscarPorId(Long id){
-        return repository.findById(id).orElse(null);
+        return eventos.stream()
+                .filter(e -> e.getId() == id)
+                .findFirst()
+                .orElse(null);
     }
 
-    public void eliminar(Long id){ 
-        repository.deleteById(id);
+    public void eliminar(Long id) {
+        eventos.removeIf(e -> e.getId() == id);
     }
-
 }
