@@ -38,7 +38,7 @@ services:
     container_name: promtail
 
     volumes:
-      - ./logs:/logs
+      - ./Evento/logs:/logs
       - ./promtail/promtail-config.yml:/etc/promtail/config.yml
 
     command: -config.file=/etc/promtail/config.yml
